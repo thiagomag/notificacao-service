@@ -4,7 +4,6 @@ import br.com.postechfiap.notificacaoservice.application.interfaces.CriarNotific
 import br.com.postechfiap.notificacaoservice.infraestructure.controller.adapters.NotificacaoAdapter;
 import br.com.postechfiap.notificacaoservice.infraestructure.controller.dto.NotificacaoDto;
 import br.com.postechfiap.notificacaoservice.infraestructure.controller.dto.NotificacaoResponse;
-import br.com.postechfiap.notificacaoservice.infraestructure.controller.dto.NotificacaoUsuariosResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +22,7 @@ public class NotificacaoController {
 
     @PostMapping
     public ResponseEntity<NotificacaoResponse> criarNotificacao(@RequestBody NotificacaoDto notificacaoDto) {
-        final var user = notificacaoAdapter.toNotificacao(notificacaoDto);
-        return new ResponseEntity<>(criarNotificacaoUseCase.execute(user), HttpStatus.CREATED);
+        final var notificacao = notificacaoAdapter.toNotificacao(notificacaoDto);
+        return new ResponseEntity<>(criarNotificacaoUseCase.execute(notificacao), HttpStatus.CREATED);
     }
 }

@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: notificacao-service
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:notificacao}${DB_URL_PARAM:?ssl=false}
+    username: ${DATABASE_USERNAME:postgres}
+    password: ${DATABASE_PASSWORD:postgres}
+    hikari:
+      maximum-pool-size: 10
+    jpa:
+      show-sql: true
+      hibernate:
+        generate-ddl: true
+        ddl-auto: update
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: javafiapgrupo29@gmail.com
+    password: wktjmmafhonbxkjn
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true

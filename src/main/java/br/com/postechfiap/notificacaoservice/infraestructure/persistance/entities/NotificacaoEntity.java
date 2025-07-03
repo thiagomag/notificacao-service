@@ -1,13 +1,12 @@
 package br.com.postechfiap.notificacaoservice.infraestructure.persistance.entities;
 
+import br.com.postechfiap.notificacaoservice.domain.enums.TipoNotificacaoEnum;
 import jakarta.persistence.*;
 import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @Entity
 @Table(name="notificacao")
@@ -21,5 +20,6 @@ public class NotificacaoEntity extends BaseEntity<Long> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
+    private TipoNotificacaoEnum tipo;
     private String descricao;
 }

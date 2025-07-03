@@ -47,4 +47,9 @@ public class NotificacaoUsuariosRepositoryGateway implements NotificacaoUsuarios
         entity.setUpdatedAt(LocalDateTime.now());
         return notificacaoUsuariosRepository.save(entity);
     }
+
+    @Override
+    public List<NotificacaoUsuariosEntity> findByNotificacaoId(Long notificacaoId) {
+        return notificacaoUsuariosRepository.findByNotificacao_IdAndDeletedTmspIsNull(notificacaoId);
+    }
 }

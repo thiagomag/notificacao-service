@@ -1,5 +1,6 @@
 package br.com.postechfiap.notificacaoservice.infraestructure.controller.dto;
 
+import br.com.postechfiap.notificacaoservice.domain.enums.TipoNotificacaoEnum;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -21,6 +22,7 @@ public class NotificacaoDto {
 
     private String nome;
     private String descricao;
+    private TipoNotificacaoEnum tipo;
     private List<Long> idUsuarios;
 
 

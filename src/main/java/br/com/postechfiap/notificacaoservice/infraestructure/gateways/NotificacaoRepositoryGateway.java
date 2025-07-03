@@ -1,6 +1,7 @@
 package br.com.postechfiap.notificacaoservice.infraestructure.gateways;
 
 import br.com.postechfiap.notificacaoservice.application.gatways.NotificacaoGateway;
+import br.com.postechfiap.notificacaoservice.domain.enums.TipoNotificacaoEnum;
 import br.com.postechfiap.notificacaoservice.infraestructure.persistance.entities.NotificacaoEntity;
 import br.com.postechfiap.notificacaoservice.infraestructure.persistance.repository.NotificacaoRepository;
 import lombok.RequiredArgsConstructor;
@@ -46,5 +47,10 @@ public class NotificacaoRepositoryGateway implements NotificacaoGateway {
     public NotificacaoEntity update(NotificacaoEntity entity) {
         entity.setUpdatedAt(LocalDateTime.now());
         return notificacaoRepository.save(entity);
+    }
+
+    @Override
+    public Optional<NotificacaoEntity> findByTipo(TipoNotificacaoEnum tipo) {
+        return notificacaoRepository.findByTipoAndDescricaoIsNull(tipo);
     }
 }

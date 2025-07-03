@@ -19,6 +19,7 @@ public class NotificacaoEntityAdapter {
         return NotificacaoEntity.builder()
                 .nome(notificacao.getNome())
                 .descricao(notificacao.getDescricao())
+                .tipo(notificacao.getTipo())
                 .build();
     }
 
@@ -27,6 +28,7 @@ public class NotificacaoEntityAdapter {
                 .id(notificacaoEntity.getId())
                 .nome(notificacaoEntity.getNome())
                 .descricao(notificacaoEntity.getDescricao())
+                .tipo(notificacaoEntity.getTipo())
                 .usuariosNotificacao(notificacaoUsuariosEntityAdapter.toResponseList(notificacaoUsuariosList))
                 .build();
     }

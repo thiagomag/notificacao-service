@@ -11,6 +11,7 @@ public class NotificacaoAdapter {
        return Notificacao.builder()
                .nome(notificacaoDto.getNome())
                .descricao(notificacaoDto.getDescricao())
+               .tipo(notificacaoDto.getTipo())
                .idUsuarios(notificacaoDto.getIdUsuarios())
                .build();
     }
