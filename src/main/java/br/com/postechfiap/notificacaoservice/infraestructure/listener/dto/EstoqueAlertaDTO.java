@@ -5,9 +5,16 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 @Getter
 @Setter
-public class NotificacaoEvent {
+public class EstoqueAlertaDTO {
+    private String nomeProduto;
+    private String sku;
+    private String laboratorio;
+    private Integer quantidade;
+    private LocalDateTime dataAnalise;
     private String tipoNotificacao;
 }

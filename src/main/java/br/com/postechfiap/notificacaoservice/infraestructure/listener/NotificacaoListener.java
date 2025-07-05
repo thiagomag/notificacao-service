@@ -2,7 +2,7 @@ package br.com.postechfiap.notificacaoservice.infraestructure.listener;
 
 import br.com.postechfiap.notificacaoservice.application.interfaces.EnviarNotificacaoUseCase;
 import br.com.postechfiap.notificacaoservice.application.usecases.dto.EnviarNotificacaoContext;
-import br.com.postechfiap.notificacaoservice.infraestructure.listener.dto.NotificacaoEvent;
+import br.com.postechfiap.notificacaoservice.infraestructure.listener.dto.EstoqueAlertaDTO;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -33,11 +33,11 @@ public class NotificacaoListener {
         JsonNode rootNode = objectMapper.readTree(realJson);
         System.out.println("JSON NODE   " + rootNode);
 
-        JsonNode produtoNode = rootNode.get("notificacoes");
-        NotificacaoEvent notificacaoEvent = objectMapper.treeToValue(produtoNode, NotificacaoEvent.class);
+        JsonNode jsonNode = rootNode.get("notificacoes");
+        EstoqueAlertaDTO estoqueAlertaDTO = objectMapper.treeToValue(jsonNode, EstoqueAlertaDTO.class);
 
         final var context = EnviarNotificacaoContext.builder()
-                .notificacaoEvent(notificacaoEvent)
+                .estoqueAlertaDTO(estoqueAlertaDTO)
                 .build();
         enviarNotificacaoUseCase.execute(context);
     }

@@ -24,7 +24,7 @@ public class EnviarNotificacaoUseCaseImpl implements EnviarNotificacaoUseCase {
 
     @Override
     public Void execute(EnviarNotificacaoContext enviarNotificacaoContext) {
-        final var tipoNotificacao = enviarNotificacaoContext.getNotificacaoEvent().getTipoNotificacao();
+        final var tipoNotificacao = enviarNotificacaoContext.getEstoqueAlertaDTO().getTipoNotificacao();
         final var notificacao = notificacaoRepositoryGateway.findByTipo(TipoNotificacaoEnum.valueOf(tipoNotificacao))
                 .orElseThrow(() -> new IllegalArgumentException("Notificação não encontrada para o tipo: " + tipoNotificacao));
         notificacaoUsuariosRepositoryGateway.findByNotificacaoId(notificacao.getId())
