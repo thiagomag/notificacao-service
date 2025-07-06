@@ -7,11 +7,6 @@ spring:
     password: ${DATABASE_PASSWORD:postgres}
     hikari:
       maximum-pool-size: 10
-    jpa:
-      show-sql: true
-      hibernate:
-        generate-ddl: true
-        ddl-auto: update
   mail:
     host: smtp.gmail.com
     port: 587
@@ -23,3 +18,16 @@ spring:
           auth: true
           starttls:
             enable: true
+  kafka:
+    consumer:
+      group-id: notificacao-service
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    bootstrap-servers: kafka:9092
+
+client:
+  cadastro-usuarios-service:
+    name: cadastro-usuarios-service-client
+    url: http://localhost:8080/api/auth
+    api-key: RXN0YSDDqSBhIGFwaS1rZXkgZG8gYXR1dGVudGljYcOnw6NvLXNlcnZpY2U=
