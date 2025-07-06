@@ -31,3 +31,6 @@ client:
     name: cadastro-usuarios-service-client
     url: ${CADASTRO_USUARIO_SERVICE_HOST:http://localhost:8080}/api/auth
     api-key: RXN0YSDDqSBhIGFwaS1rZXkgZG8gYXR1dGVudGljYcOnw6NvLXNlcnZpY2U=
+
+server:
+  port: 8083
