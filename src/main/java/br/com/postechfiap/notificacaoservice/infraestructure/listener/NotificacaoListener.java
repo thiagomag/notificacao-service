@@ -3,8 +3,6 @@ package br.com.postechfiap.notificacaoservice.infraestructure.listener;
 import br.com.postechfiap.notificacaoservice.application.interfaces.EnviarNotificacaoUseCase;
 import br.com.postechfiap.notificacaoservice.application.usecases.dto.EnviarNotificacaoContext;
 import br.com.postechfiap.notificacaoservice.infraestructure.listener.dto.EstoqueAlertaDTO;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaHandler;
@@ -23,26 +21,21 @@ import org.springframework.stereotype.Component;
 public class NotificacaoListener {
 
     private final EnviarNotificacaoUseCase enviarNotificacaoUseCase;
-    private final ObjectMapper objectMapper;
 
     @KafkaHandler
-    public void onPedidoCreated(@Payload String messageAsJson) {
-    try {
-        System.out.println("Mensagem JSON bruta recebida do Kafka: " + messageAsJson);
-        String realJson = objectMapper.readValue(messageAsJson, String.class);
-        JsonNode rootNode = objectMapper.readTree(realJson);
-        System.out.println("JSON NODE   " + rootNode);
+    public void onPedidoCreated(@Payload EstoqueAlertaDTO estoqueAlertaDTO) {
+        try {
+            log.info("Mensagem desserializada recebida para o SKU: {}", estoqueAlertaDTO.getSku());
 
-        JsonNode jsonNode = rootNode.get("notificacoes");
-        EstoqueAlertaDTO estoqueAlertaDTO = objectMapper.treeToValue(jsonNode, EstoqueAlertaDTO.class);
+            final var context = EnviarNotificacaoContext.builder()
+                    .estoqueAlertaDTO(estoqueAlertaDTO)
+                    .build();
+            enviarNotificacaoUseCase.execute(context);
 
-        final var context = EnviarNotificacaoContext.builder()
-                .estoqueAlertaDTO(estoqueAlertaDTO)
-                .build();
-        enviarNotificacaoUseCase.execute(context);
-    }
-    catch (Exception e) {
-            log.info(" Erro ao desserializar: " + e.getMessage());
+            log.info("✅ Notificação processada com sucesso para o SKU: {}", estoqueAlertaDTO.getSku());
+
+        } catch (Exception e) {
+            log.error("❌ Erro ao executar o caso de uso para a notificação: {}", e.getMessage());
         }
     }
 }
