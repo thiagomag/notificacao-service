@@ -8,7 +8,9 @@ spring:
     hikari:
       maximum-pool-size: 10
     jpa:
+      show-sql: true
       hibernate:
+        generate-ddl: true
         ddl-auto: update
   mail:
     host: smtp.gmail.com
