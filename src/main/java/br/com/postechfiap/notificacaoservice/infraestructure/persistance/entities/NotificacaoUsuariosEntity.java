@@ -19,7 +19,7 @@ public class NotificacaoUsuariosEntity extends BaseEntity<Long> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long idUsuario;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_notificacao", referencedColumnName = "id")
     private NotificacaoEntity notificacao;
 }
