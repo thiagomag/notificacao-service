@@ -34,6 +34,9 @@ spring:
           json:
             trusted:
               packages: "*"
+            value:
+              default:
+                type: br.com.postechfiap.notificacaoservice.infraestructure.listener.dto.EstoqueAlertaDTO
     bootstrap-servers: kafka:9092
 
 client:
