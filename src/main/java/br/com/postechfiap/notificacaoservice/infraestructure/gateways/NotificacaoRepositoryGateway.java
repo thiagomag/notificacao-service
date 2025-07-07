@@ -51,6 +51,6 @@ public class NotificacaoRepositoryGateway implements NotificacaoGateway {
 
     @Override
     public Optional<NotificacaoEntity> findByTipo(TipoNotificacaoEnum tipo) {
-        return notificacaoRepository.findByTipoAndDescricaoIsNull(tipo);
+        return notificacaoRepository.findByTipoAndDeletedTmspIsNull(tipo);
     }
 }

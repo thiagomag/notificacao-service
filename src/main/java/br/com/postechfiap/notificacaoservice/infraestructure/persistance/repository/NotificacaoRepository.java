@@ -8,5 +8,5 @@ import java.util.Optional;
 
 public interface NotificacaoRepository extends JpaRepository<NotificacaoEntity, Long> {
 
-    Optional<NotificacaoEntity> findByTipoAndDescricaoIsNull(TipoNotificacaoEnum tipo);
+    Optional<NotificacaoEntity> findByTipoAndDeletedTmspIsNull(TipoNotificacaoEnum tipo);
 }
