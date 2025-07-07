@@ -25,10 +25,13 @@ public class EnviarNotificacaoUseCaseImpl implements EnviarNotificacaoUseCase {
     @Override
     public Void execute(EnviarNotificacaoContext enviarNotificacaoContext) {
         final var tipoNotificacao = enviarNotificacaoContext.getEstoqueAlertaDTO().getTipoNotificacao();
+        log.info("Tipo de notificacao: {}", tipoNotificacao);
         final var notificacao = notificacaoRepositoryGateway.findByTipo(TipoNotificacaoEnum.valueOf(tipoNotificacao))
                 .orElseThrow(() -> new IllegalArgumentException("Notificação não encontrada para o tipo: " + tipoNotificacao));
+        log.info("Notificação encontrada: {}", notificacao);
         notificacaoUsuariosRepositoryGateway.findByNotificacaoId(notificacao.getId())
                 .forEach(notificacaoUsuario -> {
+                    log.info("Enviando notificação para o usuário: {}", notificacaoUsuario.getIdUsuario());
                     final var usuario = cadastroUsuarioServiceClient.buscarUsuarioPorId(notificacaoUsuario.getIdUsuario());
                     enviarNotificacao(usuario.getEmail(), "Medicamento no final");
                     log.info("Notificação {} enviada para o usuário: " + usuario.getEmail(), tipoNotificacao);
@@ -37,6 +40,7 @@ public class EnviarNotificacaoUseCaseImpl implements EnviarNotificacaoUseCase {
     }
 
     public void enviarNotificacao(String email, String mensagem) {
+        log.info("Enviando notificação para o email: " + email);
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(email);
         message.setSubject("Notificação de Estacionamento");
