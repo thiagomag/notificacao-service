@@ -17,4 +17,17 @@ public class EstoqueAlertaDTO {
     private Integer quantidade;
     private LocalDateTime dataAnalise;
     private String tipoNotificacao;
+
+
+    @Override
+    public String toString() {
+        return "{" +
+                "nomeProduto: '" + nomeProduto + '\'' +
+                ", sku: " + sku + '\'' +
+                ", laboratorio: " + laboratorio + '\'' +
+                ", quantidade: " + quantidade +
+                ", dataAnalise: " + dataAnalise +
+                ", tipoNotificacao: '" + tipoNotificacao + '\'' +
+                '}';
+    }
 }

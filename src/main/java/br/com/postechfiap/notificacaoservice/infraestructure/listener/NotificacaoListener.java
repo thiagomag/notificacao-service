@@ -25,7 +25,7 @@ public class NotificacaoListener {
     @KafkaHandler
     public void onPedidoCreated(@Payload EstoqueAlertaDTO estoqueAlertaDTO) {
         try {
-            log.info("Mensagem desserializada recebida: {}", estoqueAlertaDTO);
+            log.info("Mensagem desserializada recebida: {}", estoqueAlertaDTO.toString());
 
             final var context = EnviarNotificacaoContext.builder()
                     .estoqueAlertaDTO(estoqueAlertaDTO)
