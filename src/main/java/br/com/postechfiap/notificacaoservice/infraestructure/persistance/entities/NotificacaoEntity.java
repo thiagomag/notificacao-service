@@ -20,6 +20,7 @@ public class NotificacaoEntity extends BaseEntity<Long> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
+    @Enumerated(EnumType.STRING)
     private TipoNotificacaoEnum tipo;
     private String descricao;
 }
