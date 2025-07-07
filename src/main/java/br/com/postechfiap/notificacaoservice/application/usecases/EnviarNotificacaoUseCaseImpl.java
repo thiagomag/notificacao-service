@@ -6,6 +6,7 @@ import br.com.postechfiap.notificacaoservice.domain.enums.TipoNotificacaoEnum;
 import br.com.postechfiap.notificacaoservice.infraestructure.client.CadastroUsuarioServiceClient;
 import br.com.postechfiap.notificacaoservice.infraestructure.gateways.NotificacaoRepositoryGateway;
 import br.com.postechfiap.notificacaoservice.infraestructure.gateways.NotificacaoUsuariosRepositoryGateway;
+import br.com.postechfiap.notificacaoservice.infraestructure.listener.dto.EstoqueAlertaDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.mail.SimpleMailMessage;
@@ -24,7 +25,8 @@ public class EnviarNotificacaoUseCaseImpl implements EnviarNotificacaoUseCase {
 
     @Override
     public Void execute(EnviarNotificacaoContext enviarNotificacaoContext) {
-        final var tipoNotificacao = enviarNotificacaoContext.getEstoqueAlertaDTO().getTipoNotificacao();
+        final var estoqueAlertaDTO = enviarNotificacaoContext.getEstoqueAlertaDTO();
+        final var tipoNotificacao = estoqueAlertaDTO.getTipoNotificacao();
         log.info("Tipo de notificacao: {}", tipoNotificacao);
         final var notificacao = notificacaoRepositoryGateway.findByTipo(TipoNotificacaoEnum.valueOf(tipoNotificacao))
                 .orElseThrow(() -> new IllegalArgumentException("Notificação não encontrada para o tipo: " + tipoNotificacao));
@@ -33,19 +35,42 @@ public class EnviarNotificacaoUseCaseImpl implements EnviarNotificacaoUseCase {
                 .forEach(notificacaoUsuario -> {
                     log.info("Enviando notificação para o usuário: {}", notificacaoUsuario.getIdUsuario());
                     final var usuario = cadastroUsuarioServiceClient.buscarUsuarioPorId(notificacaoUsuario.getIdUsuario());
-                    enviarNotificacao(usuario.getEmail(), "Medicamento no final");
+                    enviarNotificacao(usuario.getEmail(), estoqueAlertaDTO);
                     log.info("Notificação {} enviada para o usuário: " + usuario.getEmail(), tipoNotificacao);
                 });
         return null;
     }
 
-    public void enviarNotificacao(String email, String mensagem) {
+    public void enviarNotificacao(String email, EstoqueAlertaDTO estoqueAlertaDTO) {
         log.info("Enviando notificação para o email: " + email);
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(email);
-        message.setSubject("Notificação de Estacionamento");
-        message.setText(mensagem);
+        message.setSubject("Notificação Sistema de Medicamentos SUS");
+        message.setText(buildMessagem(estoqueAlertaDTO));
         mailSender.send(message);
         log.info("Notificação enviada para " + email);
+    }
+
+    private String buildMessagem(EstoqueAlertaDTO estoqueAlertaDTO) {
+        return """
+               Email de notificação do Sistema de Medicamentos SUS
+               
+                Olá, este é um email automático do Sistema de Medicamentos SUS.
+                Informamos que o medicamento com o SKU: %s está com estoque baixo.
+                Por favor, verifique o estoque e tome as medidas necessárias.
+                Detalhes do Alerta:
+                - SKU: %s
+                - Nome do Medicamento: %s
+                - Laboratório: %s
+                - Quantidade Atual: %d
+               """
+                .formatted(
+                        estoqueAlertaDTO.getSku(),
+                        estoqueAlertaDTO.getSku(),
+                        estoqueAlertaDTO.getNomeProduto(),
+                        estoqueAlertaDTO.getLaboratorio(),
+                        estoqueAlertaDTO.getQuantidade()
+                );
+
     }
 }

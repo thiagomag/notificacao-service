@@ -2,6 +2,7 @@ package br.com.postechfiap.notificacaoservice.infraestructure.gateways;
 
 import br.com.postechfiap.notificacaoservice.application.gatways.NotificacaoGateway;
 import br.com.postechfiap.notificacaoservice.domain.enums.TipoNotificacaoEnum;
+import br.com.postechfiap.notificacaoservice.infraestructure.persistance.entities.BaseEntity;
 import br.com.postechfiap.notificacaoservice.infraestructure.persistance.entities.NotificacaoEntity;
 import br.com.postechfiap.notificacaoservice.infraestructure.persistance.repository.NotificacaoRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,11 @@ public class NotificacaoRepositoryGateway implements NotificacaoGateway {
     }
 
     @Override
+    public List<NotificacaoEntity> saveAll(List<NotificacaoEntity> entities) {
+        return notificacaoRepository.saveAll(entities);
+    }
+
+    @Override
     public List<NotificacaoEntity> findAll() {
         return notificacaoRepository.findAll();
     }
@@ -36,6 +42,12 @@ public class NotificacaoRepositoryGateway implements NotificacaoGateway {
     public void delete(NotificacaoEntity entity) {
         entity.delete();
         notificacaoRepository.save(entity);
+    }
+
+    @Override
+    public void deleteAll(List<NotificacaoEntity> entities) {
+        entities.forEach(BaseEntity::delete);
+        notificacaoRepository.saveAll(entities);
     }
 
     @Override

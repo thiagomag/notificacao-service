@@ -1,5 +1,6 @@
 package br.com.postechfiap.notificacaoservice.infraestructure.gateways.adapters;
 
+import br.com.postechfiap.notificacaoservice.domain.entity.NotificacaoUsuarios;
 import br.com.postechfiap.notificacaoservice.infraestructure.controller.dto.NotificacaoUsuariosResponse;
 import br.com.postechfiap.notificacaoservice.infraestructure.persistance.entities.NotificacaoEntity;
 import br.com.postechfiap.notificacaoservice.infraestructure.persistance.entities.NotificacaoUsuariosEntity;
@@ -19,10 +20,10 @@ public class NotificacaoUsuariosEntityAdapter {
                 .build();
     }
 
-    public NotificacaoUsuariosResponse toResponse(NotificacaoUsuariosEntity notificacaoUsuariosEntity) {
-        return NotificacaoUsuariosResponse.builder()
-                .idUsuario(notificacaoUsuariosEntity.getIdUsuario())
-                .idNotificacao(notificacaoUsuariosEntity.getNotificacao().getId())
+    public NotificacaoUsuariosEntity toEntity(NotificacaoUsuarios notificacaoUsuarios, NotificacaoEntity notificacao) {
+        return NotificacaoUsuariosEntity.builder()
+                .idUsuario(notificacaoUsuarios.getIdUsuario())
+                .notificacao(notificacao)
                 .build();
     }
 
