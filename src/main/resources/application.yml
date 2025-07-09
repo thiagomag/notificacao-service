@@ -43,7 +43,12 @@ client:
   cadastro-usuarios-service:
     name: cadastro-usuarios-service-client
     url: ${CADASTRO_USUARIO_SERVICE_HOST:http://localhost:8080}/api/auth
-    api-key: RXN0YSDDqSBhIGFwaS1rZXkgZG8gYXR1dGVudGljYcOnw6NvLXNlcnZpY2U=
+    api-key: RXN0YSDDqSBhIGFwaS1rZXkgZG8gY2FkYXN0cm8tdXN1YXJpb3Mtc2VydmljZQ==
+  medicamentos-service:
+    name: medicamentos-service-client
+    url: ${MEDICAMENTOS_SERVICE_HOST:http://localhost:8080}/api/medicamentos
+    api-key: RXN0YSD
+
 
 server:
   port: 8083

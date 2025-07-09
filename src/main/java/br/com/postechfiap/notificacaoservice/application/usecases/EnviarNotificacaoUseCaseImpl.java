@@ -4,6 +4,7 @@ import br.com.postechfiap.notificacaoservice.application.interfaces.EnviarNotifi
 import br.com.postechfiap.notificacaoservice.application.usecases.dto.EnviarNotificacaoContext;
 import br.com.postechfiap.notificacaoservice.domain.enums.TipoNotificacaoEnum;
 import br.com.postechfiap.notificacaoservice.infraestructure.client.CadastroUsuarioServiceClient;
+import br.com.postechfiap.notificacaoservice.infraestructure.client.MedicamentosServiceClient;
 import br.com.postechfiap.notificacaoservice.infraestructure.gateways.NotificacaoRepositoryGateway;
 import br.com.postechfiap.notificacaoservice.infraestructure.gateways.NotificacaoUsuariosRepositoryGateway;
 import br.com.postechfiap.notificacaoservice.infraestructure.listener.dto.EstoqueAlertaDTO;
@@ -21,6 +22,7 @@ public class EnviarNotificacaoUseCaseImpl implements EnviarNotificacaoUseCase {
     private final NotificacaoRepositoryGateway notificacaoRepositoryGateway;
     private final NotificacaoUsuariosRepositoryGateway notificacaoUsuariosRepositoryGateway;
     private final CadastroUsuarioServiceClient cadastroUsuarioServiceClient;
+    private final MedicamentosServiceClient medicamentosServiceClient;
     private final JavaMailSender mailSender;
 
     @Override
@@ -38,7 +40,7 @@ public class EnviarNotificacaoUseCaseImpl implements EnviarNotificacaoUseCase {
                     enviarNotificacao(usuario.getEmail(), estoqueAlertaDTO);
                     log.info("Notificação {} enviada para o usuário: " + usuario.getEmail(), tipoNotificacao);
                 });
-        return null;
+        return medicamentosServiceClient.atualizarReposicaoPendente(estoqueAlertaDTO.getSku());
     }
 
     public void enviarNotificacao(String email, EstoqueAlertaDTO estoqueAlertaDTO) {

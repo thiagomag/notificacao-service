@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class FeignClientConfig {
+public class CadastroUsuacriosFeignClientConfig {
 
     @Value("${client.cadastro-usuarios-service.api-key}")
     private String cadastroUsuariosServiceApiKey;

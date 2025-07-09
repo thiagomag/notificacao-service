@@ -1,6 +1,6 @@
 package br.com.postechfiap.notificacaoservice.infraestructure.client;
 
-import br.com.postechfiap.notificacaoservice.application.configuration.FeignClientConfig;
+import br.com.postechfiap.notificacaoservice.application.configuration.CadastroUsuacriosFeignClientConfig;
 import br.com.postechfiap.notificacaoservice.infraestructure.client.dto.UserResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 @FeignClient(
         name = "${client.cadastro-usuarios-service.name}",
         url = "${client.cadastro-usuarios-service.url}",
-        configuration = FeignClientConfig.class
+        configuration = CadastroUsuacriosFeignClientConfig.class
 )
 public interface CadastroUsuarioServiceClient {
 
