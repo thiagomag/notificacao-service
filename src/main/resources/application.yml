@@ -47,7 +47,7 @@ client:
   medicamentos-service:
     name: medicamentos-service-client
     url: ${MEDICAMENTOS_SERVICE_HOST:http://localhost:8080}/api/medicamento
-    api-key: RXN0YSD
+    api-key: RXN0YSDDqSBhIGFwaS1rZXkgZG8gbWVkaWNhbWVudG9zLXNlcnZpY2U=
 
 
 server:
