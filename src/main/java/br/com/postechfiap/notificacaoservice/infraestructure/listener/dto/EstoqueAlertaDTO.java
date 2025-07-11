@@ -20,8 +20,8 @@ public class EstoqueAlertaDTO {
     public String toString() {
         return "{" +
                 "nomeProduto: '" + nomeProduto + '\'' +
-                ", sku: " + sku + '\'' +
-                ", laboratorio: " + laboratorio + '\'' +
+                ", sku: '" + sku + '\'' +
+                ", laboratorio: '" + laboratorio + '\'' +
                 ", quantidade: " + quantidade +
                 ", dataAnalise: " + dataAnalise +
                 ", tipoNotificacao: '" + tipoNotificacao + '\'' +
