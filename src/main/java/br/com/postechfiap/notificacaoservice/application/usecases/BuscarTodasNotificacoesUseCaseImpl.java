@@ -1,7 +1,7 @@
 package br.com.postechfiap.notificacaoservice.application.usecases;
 
-import br.com.postechfiap.notificacaoservice.application.gatways.NotificacaoGateway;
-import br.com.postechfiap.notificacaoservice.application.gatways.NotificacaoUsuariosGateway;
+import br.com.postechfiap.notificacaoservice.application.gateways.NotificacaoGateway;
+import br.com.postechfiap.notificacaoservice.application.gateways.NotificacaoUsuariosGateway;
 import br.com.postechfiap.notificacaoservice.application.interfaces.BuscarTodasNotificacoesUseCase;
 import br.com.postechfiap.notificacaoservice.application.usecases.dto.NotificacaoQueryParams;
 import br.com.postechfiap.notificacaoservice.infraestructure.controller.dto.NotificacaoResponse;

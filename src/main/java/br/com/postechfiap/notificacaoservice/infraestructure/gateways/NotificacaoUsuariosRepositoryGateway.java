@@ -1,6 +1,6 @@
 package br.com.postechfiap.notificacaoservice.infraestructure.gateways;
 
-import br.com.postechfiap.notificacaoservice.application.gatways.NotificacaoUsuariosGateway;
+import br.com.postechfiap.notificacaoservice.application.gateways.NotificacaoUsuariosGateway;
 import br.com.postechfiap.notificacaoservice.infraestructure.persistance.entities.BaseEntity;
 import br.com.postechfiap.notificacaoservice.infraestructure.persistance.entities.NotificacaoUsuariosEntity;
 import br.com.postechfiap.notificacaoservice.infraestructure.persistance.repository.NotificacaoUsuariosRepository;

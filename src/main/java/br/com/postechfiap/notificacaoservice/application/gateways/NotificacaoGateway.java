@@ -1,4 +1,4 @@
-package br.com.postechfiap.notificacaoservice.application.gatways;
+package br.com.postechfiap.notificacaoservice.application.gateways;
 
 import br.com.postechfiap.notificacaoservice.domain.enums.TipoNotificacaoEnum;
 import br.com.postechfiap.notificacaoservice.infraestructure.persistance.entities.NotificacaoEntity;
